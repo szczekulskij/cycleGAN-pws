@@ -1,3 +1,4 @@
+# One off scripts to get port wine birtmark images from the internet
 import urllib.request
 from serpapi import GoogleSearch
 
