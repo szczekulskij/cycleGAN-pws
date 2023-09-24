@@ -172,3 +172,27 @@ def detect_face(image, photo_path = None, additional_pixels = 100):
         x2 = min(x2+i,X_SIZE-1)
         image = image[y1:y2, x1:x2]
     return image
+
+
+
+def get_all_ambroziak_pws_pictures():
+    '''
+    '''
+    X = []
+    list_of_patients_nr = get_list_of_available_patient_nrs()
+    for patient_nr in list_of_patients_nr:
+        patient_position_scans = PWS_POSITION_DICT[str(patient_nr)]
+        for scan_position in patient_position_scans:
+            if scan_position == "middle": photo_nr = 6
+            elif scan_position == "left": photo_nr = 2
+            elif scan_position == "right": photo_nr = 3
+            else : raise Exception()
+            
+            # main meat here:
+            patient_img = get_image(patient_nr = patient_nr, 
+                                    image_type = "2d_snapshots",
+                                    only_face = True,
+                                    before = True,
+                                    photo_nr = photo_nr)
+            X.append(patient_img)
+    return X
