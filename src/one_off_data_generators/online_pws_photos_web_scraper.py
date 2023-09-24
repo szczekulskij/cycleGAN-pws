@@ -1,6 +1,5 @@
 import urllib.request
 from serpapi import GoogleSearch
-# "port wine stain birtmark face adult"
 
 
 def get_google_images(query_search_terms):
@@ -51,15 +50,23 @@ def get_google_images(query_search_terms):
     
     print(image_results)
     for index, image in enumerate(image_results, start=1):
-        print("index: ", index)
-        print("image: ", image)
-        print(f"Downloading {index} image...")
-        
-        opener=urllib.request.build_opener()
-        opener.addheaders=[("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36")]
-        urllib.request.install_opener(opener)
+        try:
+                
+            print("index: ", index)
+            print("image: ", image)
+            print(f"Downloading {index} image...")
+            
+            opener=urllib.request.build_opener()
+            opener.addheaders=[("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36")]
+            urllib.request.install_opener(opener)
 
-        urllib.request.urlretrieve(image, f"SerpApi_Images/original_size_img_{index}.jpg")
+            urllib.request.urlretrieve(image, f"PWS-IMAGES/original_size_img_{index}.jpg")
+        except:
+            pass
 
-    print(json.dumps(image_results, indent=2))
-    print(len(image_results))
+
+get_google_images([
+    "port wine stain birthmark face adult",
+    "port wine stain birthmark face single person",
+    "port wine birtmark single person",
+])
