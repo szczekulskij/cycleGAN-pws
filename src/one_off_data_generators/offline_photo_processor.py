@@ -1,15 +1,14 @@
 import numpy as np
 import pandas as pd 
-import tensorflow as tf
 import cv2
 import matplotlib.pyplot as plt
 import os
-from one_off_data_generators.utils import find_nr_in_string, get_surname_withour_nr, get_list_of_available_patient_nrs, save_remove_from_list
+from utils import find_nr_in_string, get_surname_withour_nr, get_list_of_available_patient_nrs, save_remove_from_list, PWS_POSITION_DICT
 
 
 # IMAGE_PATH = f"Pacjenci/"
 # IMAGE_PATH = f"../PatientsPhotos/"
-IMAGE_PATH = f"../../data/PatientsPhotos/"
+IMAGE_PATH = f"../../../data/PatientsPhotos/"
 
 def get_image(patient_nr, image_type = "2d_snapshots", only_face = True, before = True, photo_nr = 1, additional_pixels = 200):
     """
@@ -57,49 +56,49 @@ def get_image(patient_nr, image_type = "2d_snapshots", only_face = True, before 
 
 
 
-    
+    IMAGE_PATH_ = IMAGE_PATH
     # append given patient_nr
     STR_PATIENT_FOLDER = find_patient_folder_given_patient_nr(patient_nr)
-    IMAGE_PATH+=STR_PATIENT_FOLDER + "/"
+    IMAGE_PATH_+=STR_PATIENT_FOLDER + "/"
 
     if before:
-        IMAGE_PATH+="przed (pierwsza wziyta)/"
+        IMAGE_PATH_+="przed (pierwsza wziyta)/"
     else : 
-        IMAGE_PATH+="po (ostatnia wizyta)/"
+        IMAGE_PATH_+="po (ostatnia wizyta)/"
 
     if image_type=="2d_snapshots":
-        IMAGE_PATH+= "2d/"
+        IMAGE_PATH_+= "2d/"
     elif image_type=="2d_source":
-        IMAGE_PATH+= "2d zdrodlowe/"
+        IMAGE_PATH_+= "2d zdrodlowe/"
     elif image_type=="3d":
-        IMAGE_PATH+= "3d/"
+        IMAGE_PATH_+= "3d/"
 
-    list_of_photos = os.listdir(IMAGE_PATH)
+    list_of_photos = os.listdir(IMAGE_PATH_)
     list_of_photos.sort()
 
     # Hardcoded fix for lost data:
 
     # print("\n\nphoto_nr:", photo_nr)
     # print("patient_nr:", patient_nr)
-    # print("IMAGE_PATH:", IMAGE_PATH)
+    # print("IMAGE_PATH:", IMAGE_PATH_)
     # print("\n\n")
 
 
-    IMAGE_PATH+=list_of_photos[photo_nr-1]
+    IMAGE_PATH_+=list_of_photos[photo_nr-1]
 
     # A lil hack till we sort out 3d data reading
     if image_type=="3d":
-        return IMAGE_PATH
+        return IMAGE_PATH_
     
-    image = cv2.imread(IMAGE_PATH)
+    image = cv2.imread(IMAGE_PATH_)
 
     if only_face : 
         try:
             # return(detect_face_deprecated)
-            return detect_face(image, IMAGE_PATH, additional_pixels)
+            return detect_face(image, IMAGE_PATH_, additional_pixels)
         except:
             print("Failed to correctely detect the face. Returning null! Handle this in data processing!")
-            print(f"IMAGE_PATH:{IMAGE_PATH}\n")
+            print(f"IMAGE_PATH:{IMAGE_PATH_}\n")
             return None
     else :
         return image
@@ -191,7 +190,7 @@ def get_all_ambroziak_pws_pictures():
             # main meat here:
             patient_img = get_image(patient_nr = patient_nr, 
                                     image_type = "2d_snapshots",
-                                    only_face = True,
+                                    only_face = False,
                                     before = True,
                                     photo_nr = photo_nr)
             X.append(patient_img)

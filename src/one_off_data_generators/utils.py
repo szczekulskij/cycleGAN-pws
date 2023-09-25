@@ -49,7 +49,7 @@ PWS_POSITION_DICT = {
     '69': ['right', 'middle'], 
 }
 
-IMAGE_PATH = f"../../data/PatientsPhotos/"
+IMAGE_PATH = f"../../../data/PatientsPhotos/"
 
 PWS_KIDS_LIST = [
 
