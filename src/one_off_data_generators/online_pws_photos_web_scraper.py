@@ -55,6 +55,7 @@ def get_google_images(query_search_terms):
                 
             print("index: ", index)
             print("image: ", image)
+            index+=2000
             print(f"Downloading {index} image...")
             
             opener=urllib.request.build_opener()
@@ -66,8 +67,13 @@ def get_google_images(query_search_terms):
             pass
 
 
+# get_google_images([
+#     "port wine stain birthmark face adult",
+#     "port wine stain birthmark face single person",
+#     "port wine birtmark single person",
+# ])
+
 get_google_images([
-    "port wine stain birthmark face adult",
-    "port wine stain birthmark face single person",
-    "port wine birtmark single person",
+    "port wine stain birthmark face man",
+    "port wine stain birthmark man",
 ])
