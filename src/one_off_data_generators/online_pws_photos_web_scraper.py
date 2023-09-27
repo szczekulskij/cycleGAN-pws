@@ -62,7 +62,9 @@ def get_google_images(query_search_terms):
             opener.addheaders=[("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36")]
             urllib.request.install_opener(opener)
 
-            urllib.request.urlretrieve(image, f"PWS-IMAGES/original_size_img_{index}.jpg")
+            # urllib.request.urlretrieve(image, f"PWS-IMAGES/original_size_img_{index}.jpg")
+            # rename the files, otherwise you can't export them to kaggle
+            urllib.request.urlretrieve(image, f"PWS-IMAGES/original-size-img-{index}.jpg")
         except:
             pass
 
