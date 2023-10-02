@@ -240,3 +240,5 @@ public/
 package-lock.json
 how_to_ssh.md
 ssh_key.pem
+*.tfrec
+*.tfrecords
