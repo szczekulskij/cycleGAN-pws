@@ -242,3 +242,4 @@ how_to_ssh.md
 ssh_key.pem
 *.tfrec
 *.tfrecords
+results/
