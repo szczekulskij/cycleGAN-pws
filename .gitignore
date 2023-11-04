@@ -244,3 +244,4 @@ ssh_key.pem
 *.tfrecords
 results/
 good-examples/
+~*
